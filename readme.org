@@ -1,6 +1,7 @@
-# Yunux' Keymap for Planck
+* Yunux' Keymap for Planck
 
-## Base Layer
+** Base Layer
+   This is the base layer
 
 #+begin_src
 |-------+-----+-------+------+-------+-------+-------+-------+------+-------+-----+-------|
@@ -17,8 +18,6 @@
 #+end_src
 
 
+** Symbol Layer
 
-
-## Symbol Layer
-
-fja
+This is the symbol layer
