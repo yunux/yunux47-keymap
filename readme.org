@@ -16,10 +16,11 @@
  `-------+-----+-------+------+-------+-------+-------+-------+------+-------+-----+-------'
  #+end_src
 
- where `META = KC_ALT` and `ALT = KC_SLCK`, `Z = RCTL_T(KC_Z)`, `/ =
- RCTL_T(KC_SLSH)`.
+ where 
+ ~META = KC_ALT~ and ~ALT = KC_SLCK~, ~Z = RCTL_T(KC_Z)~, ~/ =
+ RCTL_T(KC_SLSH)~.
 
- Left and right shift are bound to `KC_NUBS` respectively `KC_MINS` on tap.
+ Left and right shift are bound to ~KC_NUBS~ respectively ~KC_MINS~ on tap.
 
 *** Symbol (RAISE) Layer
 
