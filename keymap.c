@@ -15,6 +15,7 @@
  */
 #include QMK_KEYBOARD_H
 
+// Layers
 enum layers {
   _QWERTY,
   _LOWER,
@@ -23,8 +24,45 @@ enum layers {
   _ADJUST
 };
 
+// Custom Keycodes
+enum custom_keycodes {
+    OCQUOTE,
+    OCPAREN
+};
+
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
+
+
+// Combos
+const uint16_t PROGMEM test_combo1[] = {KC_LPRN, KC_RPRN, COMBO_END};
+const uint16_t PROGMEM test_combo2[] = {KC_AT, KC_AT, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+    COMBO(test_combo1, KC_NO),
+    COMBO(test_combo2, KC_NO), // keycodes with modifiers are possible too!
+};
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+  case 0:
+	  if (pressed) {
+        SEND_STRING("()");
+		tap_code16(KC_LEFT);
+      }
+      break;
+  case 1:
+      if (pressed) {
+        tap_code16(KC_AT);       // double quote "
+        tap_code16(KC_AT);       // double quote "
+        tap_code16(KC_LEFT);     // go left
+      }
+      break;
+  }
+}
+
+// Combos end
+
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -54,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |   ~  |   _  |   !  |   @  |   #  |   [  |   ]  |  F1  |  F2  |  F3  |  F12 |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |             |      |      | Next | Vol- | Vol+ |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_planck_mit(
@@ -83,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 /* SPACE FUNCTION LAYER: NAVIGATION ETC.
-  * ,-----------------------------------------------------------------------------------.
+ * ,-----------------------------------------------------------------------------------.
  * |      |      | INS  | END  | BSPC |C-BSPC|      |      |  UP  | A-TAB| C-UP | DEL  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | HOME | PSCR | DEL  |      | C-DEL| C-LFT| LFT  | DOWN | RIGHT|C-RGHT|      |
@@ -124,5 +162,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
+
 
 
