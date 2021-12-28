@@ -35,11 +35,14 @@ enum custom_keycodes {
 
 
 // Combos
-const uint16_t PROGMEM test_combo1[] = {KC_LPRN, KC_RPRN, COMBO_END};
-const uint16_t PROGMEM test_combo2[] = {KC_AT, KC_AT, COMBO_END};
+const uint16_t PROGMEM combo1[] = {KC_LPRN, KC_RPRN, COMBO_END};
+const uint16_t PROGMEM combo2[] = {KC_LBRC, KC_RBRC, COMBO_END};
+const uint16_t PROGMEM combo3[] = {KC_LCBR, KC_RCBR, COMBO_END};
+
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(test_combo1, KC_NO),
-    COMBO(test_combo2, KC_NO), // keycodes with modifiers are possible too!
+    COMBO(combo1, KC_NO),
+    COMBO(combo2, KC_NO),
+	COMBO(combo3, KC_NO)
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -52,15 +55,79 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
       break;
   case 1:
       if (pressed) {
-        tap_code16(KC_AT);       // double quote "
-        tap_code16(KC_AT);       // double quote "
+        SEND_STRING("[]");
+        tap_code16(KC_LEFT);     // go left
+      }
+      break;
+  case 2:
+	if (pressed) {
+        SEND_STRING("{}");
         tap_code16(KC_LEFT);     // go left
       }
       break;
   }
 }
-
 // Combos end
+
+// Tap Dance for open-close quotes
+enum {
+  DQUOTE,
+  SQUOTE
+};
+
+// Double quote
+void dance_doublequote(qk_tap_dance_state_t *state, void *user_data) {
+    switch(state->count) {
+	case 1:
+	  tap_code16(KC_AT);
+	  reset_tap_dance(state);
+	  break;
+	case 2:
+	  tap_code16(KC_AT);
+	  tap_code16(KC_AT);
+	  tap_code16(KC_LEFT);
+	  reset_tap_dance(state);
+	  break;
+	case 3:
+	  for (int i = 0; i < 3; i++) {
+		tap_code16(KC_AT);
+		tap_code16(KC_AT);
+		tap_code16(KC_LEFT);
+	  }
+	  reset_tap_dance(state);
+	  break;
+	}
+}
+
+// Single quotes
+void dance_singlequote(qk_tap_dance_state_t *state, void *user_data) {
+    switch(state->count) {
+	case 1:
+	  tap_code(KC_QUOT);
+	  reset_tap_dance(state);
+	  break;
+	case 2:
+	  tap_code(KC_QUOT);
+	  tap_code(KC_QUOT);
+	  tap_code16(KC_LEFT);
+	  reset_tap_dance(state);
+	  break;
+	case 3:
+	  for (int i = 0; i < 3; i++) {
+		tap_code(KC_QUOT);
+		tap_code(KC_QUOT);
+		tap_code16(KC_LEFT);
+	  }
+	  reset_tap_dance(state);
+	  break;
+	}
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [DQUOTE] = ACTION_TAP_DANCE_FN(dance_doublequote),
+  [SQUOTE] = ACTION_TAP_DANCE_FN(dance_singlequote)
+};
+// Tap Dance end
 
 
 
@@ -96,8 +163,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_planck_mit(
-    KC_GRV,  KC_AT,   KC_AMPR, KC_ASTR,    KC_EQL,  KC_LCBR, KC_RCBR, KC_F7, KC_F8, KC_F9, KC_F10, KC_BSPC,
-    _______, S(KC_QUOT), KC_DLR,  KC_PERC,    KC_CIRC, KC_LPRN, KC_RPRN, KC_F4, KC_F5, KC_F6, KC_F11, _______,
+    KC_GRV,  TD(DQUOTE), KC_AMPR, KC_ASTR, KC_EQL,  KC_LCBR, KC_RCBR, KC_F7, KC_F8, KC_F9, KC_F10, KC_BSPC,
+    _______, S(KC_QUOT), KC_DLR,  KC_PERC, KC_CIRC, KC_LPRN, KC_RPRN, KC_F4, KC_F5, KC_F6, KC_F11, _______,
     KC_PIPE, KC_UNDS, KC_EXLM, S(KC_QUOT), KC_NUHS, KC_LBRC, KC_RBRC, KC_F1, KC_F2, KC_F3, KC_F12, _______,
     _______, _______, _______, _______,    _______, _______, _______, _______,    KC_MNXT, KC_VOLD, KC_VOLU
 ),
@@ -115,7 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_planck_mit(
     S(KC_NUHS), _______, _______, _______,    _______,    _______, _______, KC_7,    KC_8,    KC_9,    KC_0,    KC_CIRC,
-    _______,    _______, _______, _______,    _______,    _______, _______, KC_4,    KC_5,    KC_6,    KC_QUOT, KC_EQUAL,
+    _______,    _______, _______, _______,    _______,    _______, _______, KC_4,    KC_5,    KC_6,    TD(SQUOTE), KC_EQUAL,
     _______,    _______, _______, _______,    _______,    _______, _______, KC_1,    KC_2,    KC_3,    KC_ASTR, KC_PLUS,
     _______,    _______, _______, _______,    _______,    _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
@@ -132,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_SPCFN] = LAYOUT_planck_mit(
-    _______, _______, KC_INS,  KC_END,  KC_BSPC, C(KC_BSPC), _______,    KC_CAPS,  KC_UP,    A(KC_TAB),  C(KC_UP), KC_DEL ,
+	_______, _______, KC_INS,  KC_END,  KC_BSPC, C(KC_BSPC), _______,    KC_CAPS,  KC_UP,    A(KC_TAB),  C(KC_UP), KC_DEL ,
     _______, KC_HOME, KC_PSCR, KC_DEL , _______, C(KC_DEL),  C(KC_LEFT), KC_LEFT,  KC_DOWN,  KC_RIGHT,   C(KC_RIGHT), _______,  
     _______, _______, KC_APP , _______, _______, _______,    C(KC_DOWN), _______,  _______,  _______,    _______,  _______,
     _______, _______, _______, _______, _______, _______,          _______,        _______,  _______,    _______,  _______
