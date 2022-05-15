@@ -72,7 +72,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 // Tap Dance for open-close quotes
 enum {
   DQUOTE,
-  SQUOTE
+  SQUOTE,
+  BACKTICK,
+  DOLLAR
 };
 
 // Double quote
@@ -123,9 +125,65 @@ void dance_singlequote(qk_tap_dance_state_t *state, void *user_data) {
 	}
 }
 
+// backtick
+void dance_backtick(qk_tap_dance_state_t *state, void *user_data) {
+    switch(state->count) {
+	case 1:
+	  tap_code(KC_GRV);
+	  reset_tap_dance(state);
+	  break;
+	case 2:
+	  tap_code(KC_GRV);
+	  tap_code(KC_GRV);
+	  tap_code16(KC_LEFT);
+	  reset_tap_dance(state);
+	  break;
+	case 3:
+	  for (int i = 0; i < 3; i++) {
+		tap_code(KC_GRV);
+		tap_code(KC_GRV);
+		tap_code16(KC_LEFT);
+	  }
+	  reset_tap_dance(state);
+	  break;
+	}
+}
+
+// dollar sign
+void dance_dollar(qk_tap_dance_state_t *state, void *user_data) {
+    switch(state->count) {
+	case 1:
+	  register_code(KC_RSFT);
+	  tap_code(KC_4);
+	  unregister_code(KC_RSFT);
+	  reset_tap_dance(state);
+	  break;
+	case 2:
+	  register_code(KC_RSFT);
+	  tap_code(KC_4);
+	  tap_code(KC_4);
+	  unregister_code(KC_RSFT);
+	  tap_code16(KC_LEFT);
+	  reset_tap_dance(state);
+	  break;
+	case 3:
+	  for (int i = 0; i < 3; i++) {
+		register_code(KC_RSFT);
+		tap_code(KC_4);
+		tap_code(KC_4);
+		unregister_code(KC_RSFT);
+		tap_code16(KC_LEFT);
+	  }
+	  reset_tap_dance(state);
+	  break;
+	}
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
   [DQUOTE] = ACTION_TAP_DANCE_FN(dance_doublequote),
-  [SQUOTE] = ACTION_TAP_DANCE_FN(dance_singlequote)
+  [SQUOTE] = ACTION_TAP_DANCE_FN(dance_singlequote),
+  [BACKTICK] = ACTION_TAP_DANCE_FN(dance_backtick),
+  [DOLLAR] = ACTION_TAP_DANCE_FN(dance_dollar)
 };
 // Tap Dance end
 
@@ -163,8 +221,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = LAYOUT_planck_mit(
-    KC_GRV,  TD(DQUOTE), KC_AMPR, KC_ASTR, KC_EQL,  KC_LCBR, KC_RCBR, KC_F7, KC_F8, KC_F9, KC_F10, KC_BSPC,
-    _______, S(KC_QUOT), KC_DLR,  KC_PERC, KC_CIRC, KC_LPRN, KC_RPRN, KC_F4, KC_F5, KC_F6, KC_F11, _______,
+    TD(BACKTICK),  TD(DQUOTE), KC_AMPR, KC_ASTR, KC_EQL,  KC_LCBR, KC_RCBR, KC_F7, KC_F8, KC_F9, KC_F10, KC_BSPC,
+    _______, S(KC_QUOT), TD(DOLLAR),  KC_PERC, KC_CIRC, KC_LPRN, KC_RPRN, KC_F4, KC_F5, KC_F6, KC_F11, _______,
     KC_PIPE, KC_UNDS, KC_EXLM, S(KC_QUOT), KC_NUHS, KC_LBRC, KC_RBRC, KC_F1, KC_F2, KC_F3, KC_F12, _______,
     _______, _______, _______, _______,    _______, _______, _______, _______,    KC_MNXT, KC_VOLD, KC_VOLU
 ),

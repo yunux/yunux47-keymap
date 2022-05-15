@@ -2,7 +2,7 @@
 
 ** Layers
 *** Base Layer
-	This is the base qwerty layer
+	This is the base qwerty layer.
 
  #+begin_src
  ,-------+-----+-------+------+-------+-------+-------+-------+------+-------+-----+-------.
@@ -24,8 +24,8 @@
 
 *** Symbol (RAISE) Layer
 
- This is the symbol layer
-
+ This is the symbol layer. It is accessed by holding the ~RAISE~ key and contains most symbols and function keys.
+ 
  #+begin_src
  ,-----------------------------------------------------------------------------------.
  |   `  |   "  |   &  |   *  |   =  |   {  |   }  |  F7  |  F8  |  F9  |  F10 | BSPC |
@@ -37,6 +37,8 @@
  |      |      |      |      |      |             |      |      | Next | Vol- | Vol+ |
  `-----------------------------------------------------------------------------------'
  #+end_src
+
+Tapdance is defined for =`= , ="=, and ~$~ .  Double pressing prints two of the same characters and places the cursor in between. Combos are defined for parentheses, e.g. pressing ~(~ and ~)~ simultaneously, sends both characters and places the cursor in between, i.e. moves one position left after sending the last character.
 
 *** Numbers (LOWER) Layer
 This is the numbers layer
@@ -53,8 +55,10 @@ This is the numbers layer
  `-----------------------------------------------------------------------------------'
 #+end_src
 
+Tapdance is defined for ~'~ .  Double pressing prints two of the same characters and places the cursor in between them.
+
 *** Space Function Layer
-This is the navigations and editing layer.
+This is the navigations and editing layer.  It is accessed by holding down the space key.
 
 #+begin_src 
  ,-----------------------------------------------------------------------------------.
