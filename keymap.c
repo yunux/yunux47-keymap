@@ -18,6 +18,7 @@
 // Layers
 enum layers {
   _QWERTY,
+  _VYWBR,
   _LOWER,
   _RAISE,
   _SPCFN,
@@ -208,6 +209,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LSFT_T(KC_NUBS), RCTL_T(KC_Z), KC_X,    KC_C,    KC_V,    KC_B,    KC_N,      KC_M,    KC_COMM, KC_DOT,  RCTL_T(KC_SLSH), RSFT_T(KC_MINS),
     KC_LCTL,         KC_SLCK,      KC_LGUI, KC_LALT, LOWER,   LT(_SPCFN, KC_SPC), RAISE,   KC_LALT, KC_RGUI, KC_SLCK,         KC_LCTL
 ),
+/* VYWB
+ * ,-----------------------------------------------------------------------------------.
+ * | ESC  |   V  |   Y  |   W  |   B  |   /  |   ;  |   R  |   C  |   F  |   K  | BSPC |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | TAB  |   H  |   N  |   O  |   T  |   U  |   M  |   E  |   A  |   I  |   S  | ENTER|
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | SHIFT|   P  |   X  |   Z  |   L  |   ,  |   .  |   D  |   Q  |   J  |   G  | SHIFT|
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | CTRL | ALT  | SUPER| META | LOWER|    SPACE    |RAISE | META | SUPER| ALT  | CTRL |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_VYWBR] = LAYOUT_planck_mit(
+    KC_ESC , KC_V,         KC_Y,    KC_W,    KC_B,    KC_SLSH, KC_SCLN,   KC_R,    KC_C,    KC_F,    KC_K,         _______,
+    _______, KC_H,         KC_N,    KC_O,    KC_T,    KC_U,    KC_M,      KC_E,    KC_A,    KC_I,    KC_S,         _______,
+    _______, RCTL_T(KC_P), KC_X,    KC_Z,    KC_L,    KC_COMM, KC_DOT,    KC_D,    KC_Q,    KC_J,    RCTL_T(KC_G), _______,
+	_______, _______,      _______, _______, _______,      _______,       _______, _______, _______, _______,      _______
+),
 
 /* RAISE LAYER: SYMBOLS
  * ,-----------------------------------------------------------------------------------.
@@ -276,7 +294,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_mit(
-    _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, KC_DEL ,
+    _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, TG(_VYWBR) ,
     _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
