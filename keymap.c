@@ -18,7 +18,7 @@
 // Layers
 enum layers {
   _QWERTY,
-  _VYWBR,
+  _OPTIM,
   _LOWER,
   _RAISE,
   _SPCFN,
@@ -220,10 +220,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | CTRL | ALT  | SUPER| META | LOWER|    SPACE    |RAISE | META | SUPER| ALT  | CTRL |
  * `-----------------------------------------------------------------------------------'
  */
-[_VYWBR] = LAYOUT_planck_mit(
-    KC_ESC , KC_V,         KC_Y,    KC_W,    KC_B,    KC_SLSH, KC_SCLN,   KC_R,    KC_C,    KC_F,    KC_K,         _______,
-    _______, KC_H,         KC_N,    KC_O,    KC_T,    KC_U,    KC_M,      KC_E,    KC_A,    KC_I,    KC_S,         _______,
-    _______, RCTL_T(KC_P), KC_X,    KC_Z,    KC_L,    KC_COMM, KC_DOT,    KC_D,    KC_Q,    KC_J,    RCTL_T(KC_G), _______,
+[_OPTIM] = LAYOUT_planck_mit(
+    KC_ESC , KC_V,         KC_C,    KC_D,    KC_U,    KC_SLSH, KC_SCLN,   KC_L,    KC_R,    KC_F,    KC_K,         _______,
+    _______, KC_S,         KC_N,    KC_A,    KC_T,    KC_W,    KC_M,      KC_E,    KC_O,    KC_I,    KC_H,         _______,
+    _______, RCTL_T(KC_Y), KC_X,    KC_Z,    KC_P,    KC_COMM, KC_DOT,    KC_B,    KC_Q,    KC_J,    RCTL_T(KC_G), _______,
 	_______, _______,      _______, _______, _______,      _______,       _______, _______, _______, _______,      _______
 ),
 
@@ -294,7 +294,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_mit(
-    _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, TG(_VYWBR) ,
+    _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD,  RGB_VAI, RGB_VAD, TG(_OPTIM),
     _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______,  _______,  _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
