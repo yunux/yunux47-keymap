@@ -209,13 +209,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LSFT_T(KC_NUBS), RCTL_T(KC_Z), KC_X,    KC_C,    KC_V,    KC_B,    KC_N,      KC_M,    KC_COMM, KC_DOT,  RCTL_T(KC_SLSH), RSFT_T(KC_MINS),
     KC_LCTL,         KC_SLCK,      KC_LGUI, KC_LALT, LOWER,   LT(_SPCFN, KC_SPC), RAISE,   KC_LALT, KC_RGUI, KC_SLCK,         KC_LCTL
 ),
-/* VYWB
+/* OPTIMISED
  * ,-----------------------------------------------------------------------------------.
- * | ESC  |   V  |   Y  |   W  |   B  |   /  |   ;  |   R  |   C  |   F  |   K  | BSPC |
+ * | ESC  |   V  |   C  |   D  |   U  |   /  |   ;  |   L  |   R  |   F  |   K  | BSPC |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | TAB  |   H  |   N  |   O  |   T  |   U  |   M  |   E  |   A  |   I  |   S  | ENTER|
+ * | TAB  |   S  |   N  |   A  |   T  |   W  |   M  |   E  |   O  |   I  |   H  | ENTER|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | SHIFT|   P  |   X  |   Z  |   L  |   ,  |   .  |   D  |   Q  |   J  |   G  | SHIFT|
+ * | SHIFT|   Y  |   X  |   Z  |   P  |   ,  |   .  |   B  |   Q  |   J  |   G  | SHIFT|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | CTRL | ALT  | SUPER| META | LOWER|    SPACE    |RAISE | META | SUPER| ALT  | CTRL |
  * `-----------------------------------------------------------------------------------'
