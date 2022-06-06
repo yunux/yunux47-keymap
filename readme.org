@@ -21,6 +21,38 @@
  RCTL_T(KC_SLSH)~.
 
  Left and right shift are bound to ~KC_NUBS~ respectively ~KC_MINS~ on tap.
+ 
+*** Optimised Layout Layer
+
+ #+begin_src
+ ,-----------------------------------------------------------------------------------.
+ | ESC  |   V  |   C  |   D  |   U  |   /  |   ;  |   L  |   R  |   F  |   K  | BSPC |
+ |------+------+------+------+------+------+------+------+------+------+------+------|
+ | TAB  |   S  |   N  |   A  |   T  |   W  |   M  |   E  |   O  |   I  |   H  | ENTER|
+ |------+------+------+------+------+------+------+------+------+------+------+------|
+ | SHIFT|   Y  |   X  |   Z  |   P  |   ,  |   .  |   B  |   Q  |   J  |   G  | SHIFT|
+ |------+------+------+------+------+------+------+------+------+------+------+------|
+ | CTRL | ALT  | SUPER| META | LOWER|    SPACE    |RAISE | META | SUPER| ALT  | CTRL |
+ `-----------------------------------------------------------------------------------'
+#+end_src
+
+This layer is optimised for minimum finger travel, ease of pressing, and alternating hands.  Character and bigram frequencies are based on Charles Dickens' A Tale of Two Cities.  The layout is optimised using the code in https://github.com/yunux/kblayout-optimiser/.  The finger travel and ease of pressing is encoded by the following weights:
+
+ #+begin_src
+ ,-----------------------------------------------------------------------------------.
+ |      |  2.8 |  2.3 |  2.0 |  2.1 |  4.0 |  4.0 |  2.1 |  2.0 |  2.3 |  2.8 |      |
+ |------+------+------+------+------+------+------+------+------+------+------+------|
+ |      |  1.6 |  1.4 |  1.2 |  1.0 |  2.2 |  2.2 |  1.0 |  1.2 |  1.4 |  1.6 |      |
+ |------+------+------+------+------+------+------+------+------+------+------+------|
+ |      |  2.4 |  3.0 |  3.2 |  2.5 |  4.0 |  4.0 |  2.5 |  3.2 |  3.0 |  2.4 |      |
+ |------+------+------+------+------+------+------+------+------+------+------+------|
+ |      |      |      |      |      |             |      |      |      |      |      |
+ `-----------------------------------------------------------------------------------'
+ #+end_src
+ 
+ Only alpha characters are optimised. =.=, , , =/=, and =;= are assumed to take less convenient places marked by =weight = 4.0=.
+ 
+
 
 *** Symbol (RAISE) Layer
 
@@ -78,10 +110,12 @@ This is the navigations and editing layer.  It is accessed by holding down the s
 This layer is for adjusting RGB and resetting.  Accessed by holding
 down both `RAISE` and `LOWER` keys while in the base layer.
 
+=LAYOUT= toggles between QWERTY and optimised layouts.
+
 #+begin_src 
                       v------------------------RGB CONTROL--------------------v
  ,-----------------------------------------------------------------------------------.
- |      | RESET| DEBUG| RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-| DEL  |
+ |      | RESET| DEBUG| RGB  |RGBMOD| HUE+ | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|LAYOUT|
  |------+------+------+------+------+------+------+------+------+------+------+------|
  |      |      |      |      |      |      |      |      |      |      |      |      |
  |------+------+------+------+------+------+------+------+------+------+------+------|
